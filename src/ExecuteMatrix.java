@@ -19,7 +19,7 @@ public class ExecuteMatrix {
 
         double media = 0.0;
 
-        for (int i = 0; i <= EXECUTIONS; i++) {
+        for (int i = 0; i < EXECUTIONS; i++) {
             double startTime = System.currentTimeMillis();
             matrix = matrixMultiplicationV1.calculate(matrix1, matrix2, matrixSize);
             double stopTime = System.currentTimeMillis();
@@ -35,7 +35,7 @@ public class ExecuteMatrix {
 
         double media = 0.0;
 
-        for (int i = 0; i <= EXECUTIONS; i++) {
+        for (int i = 0; i < EXECUTIONS; i++) {
             double startTime = System.currentTimeMillis();
             matrix = matrixMultiplicationV2.calculate(matrix1, matrix2, matrixSize);
             double stopTime = System.currentTimeMillis();
@@ -51,7 +51,7 @@ public class ExecuteMatrix {
 
         double media = 0.0;
 
-        for (int i = 0; i <= EXECUTIONS; i++) {
+        for (int i = 0; i < EXECUTIONS; i++) {
             double startTime = System.currentTimeMillis();
             matrix = matrixMultiplicationV3.calculate(matrix1, matrix2, matrixSize);
             double stopTime = System.currentTimeMillis();
