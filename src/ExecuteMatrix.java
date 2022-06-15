@@ -1,6 +1,6 @@
 public class ExecuteMatrix {
 
-    private static final int EXECUTIONS = 0;
+    private static final int EXECUTIONS = 9;
 
     private final MatrixMultiplicationV1 matrixMultiplicationV1;
 
