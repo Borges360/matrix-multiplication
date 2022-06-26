@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MatrixMultiplicationV32 {
 
@@ -11,7 +10,7 @@ public class MatrixMultiplicationV32 {
         CountDownLatch latchA = new CountDownLatch((int) (Math.pow(matrixSize, 3)));
         List<Thread> threads = new ArrayList<>();
         for (int i = 0; i < matrixSize; i++) {
-            Thread thread1 = new Thread(new ThreadRunnable(matrix1, matrix2, matrix, matrixSize, i, latchA));
+            Thread thread1 = new Thread(new ThreadRunnableV32(matrix1, matrix2, matrix, matrixSize, i, latchA));
             thread1.start();
             threads.add(thread1);
             if (threads.size() % 100 == 0) {

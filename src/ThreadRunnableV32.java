@@ -1,7 +1,6 @@
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class ThreadRunnable implements Runnable{
+public class ThreadRunnableV32 implements Runnable{
 
     private final int[][] matrix1;
     private final int[][] matrix2;
@@ -10,7 +9,7 @@ public class ThreadRunnable implements Runnable{
     private final int newI;
     private final CountDownLatch latchA;
 
-    public ThreadRunnable(int[][] matrix1, int[][] matrix2, int[][] matrixResult, int matrixSize, int newI, CountDownLatch latchA) {
+    public ThreadRunnableV32(int[][] matrix1, int[][] matrix2, int[][] matrixResult, int matrixSize, int newI, CountDownLatch latchA) {
         this.matrix1 = matrix1;
         this.matrix2 = matrix2;
         this.matrixResult = matrixResult;
