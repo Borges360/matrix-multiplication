@@ -4,7 +4,7 @@ public class MatrixMain {
 
     private static int[][] matrix2;
 
-    private static int matrixMaxSize = 1024;
+    private static int matrixMaxSize = 8192;
 
     public static void main(String[] args) {
 
