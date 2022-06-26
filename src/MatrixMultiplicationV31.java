@@ -1,12 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MatrixMultiplicationV32 {
+public class MatrixMultiplicationV31 {
 
     public synchronized int[][] calculate(int[][] matriz1, int[][] matriz2, int matrixSize) {
         final int[][] matrix = new int[matrixSize][matrixSize];
 
         CountDownLatch latchA = new CountDownLatch((int) (Math.pow(matrixSize, 3)));
+        List<Thread> threads = new ArrayList<>();
         AtomicInteger i = new AtomicInteger();
         for (i.get(); i.get() < matrixSize; i.getAndIncrement()) {
             final int newI = i.get();
@@ -22,10 +25,15 @@ public class MatrixMultiplicationV32 {
                         final int newj = j.get();
                         matrix[newI][newj] = matrix[newI][newj] + matriz1[newI][newk] * matriz2[newk][newj];
                         latchA.countDown();
+
                     }
                 }
             });
             thread1.start();
+            threads.add(thread1);
+            if (threads.size() % 100 == 0) {
+                waitForThreads(threads);
+            }
         }
         try {
             latchA.await();
@@ -33,6 +41,17 @@ public class MatrixMultiplicationV32 {
             e.printStackTrace();
         }
         return matrix;
+    }
+
+    private void waitForThreads(List<Thread> threads) {
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        threads.clear();
     }
 
 }
