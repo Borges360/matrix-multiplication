@@ -1,6 +1,6 @@
 import java.util.concurrent.CountDownLatch;
 
-public class ThreadRunnableV32 implements Runnable{
+public class ThreadRunnableV32 implements Runnable {
 
     private final int[][] matrix1;
     private final int[][] matrix2;
