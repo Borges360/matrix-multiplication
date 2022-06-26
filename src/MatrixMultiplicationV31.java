@@ -10,20 +10,16 @@ public class MatrixMultiplicationV31 {
 
         CountDownLatch latchA = new CountDownLatch((int) (Math.pow(matrixSize, 3)));
         List<Thread> threads = new ArrayList<>();
-        AtomicInteger i = new AtomicInteger();
-        for (i.get(); i.get() < matrixSize; i.getAndIncrement()) {
-            final int newI = i.get();
+        
+        for (int i = 0; i < matrixSize; i++) {
+            int finalI = i;
             Thread thread1 = new Thread(() -> {
 
-                AtomicInteger k = new AtomicInteger();
-                for (k.get(); k.get() < matrixSize; k.getAndIncrement()) {
-                    final int newk = k.get();
-
-                    AtomicInteger j = new AtomicInteger();
-                    for (j.get(); j.get() < matrixSize; j.getAndIncrement()) {
-
-                        final int newj = j.get();
-                        matrix[newI][newj] = matrix[newI][newj] + matriz1[newI][newk] * matriz2[newk][newj];
+                for (int k = 0; k < matrixSize; k++) {
+                    
+                    for (int j = 0; j < matrixSize; j++) {
+                        
+                        matrix[finalI][j] = matrix[finalI][j] + matriz1[finalI][k] * matriz2[k][j];
                         latchA.countDown();
 
                     }

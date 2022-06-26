@@ -1,5 +1,6 @@
 public class MatrixMultiplicationV41 {
 
+    //Version 4 single Thread
     public int[][] calculate(int[][] matriz1, int[][] matriz2, int matrixSize) {
         final int[][] matrix = new int[matrixSize][matrixSize];
         
