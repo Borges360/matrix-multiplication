@@ -43,8 +43,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 1 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 1", media);
-        System.out.println("algoritmo 1 média de " + EXECUTIONS + " execuções: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 1 média de " + EXECUTIONS + " execuções: " + media + " segundos");
         return matrix;
     }
 
@@ -60,8 +61,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 2 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 2", media);
-        System.out.println("algoritmo 2 média de " + EXECUTIONS + " execuções: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 2 média de " + EXECUTIONS + " execuções: " + media + " segundos");
         return matrix;
     }
 
@@ -77,8 +79,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 3 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 3", media);
-        System.out.println("algoritmo 3 média de " + EXECUTIONS + " execução: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 3 média de " + EXECUTIONS + " execução: " + media + " segundos");
         return matrix;
     }
 
@@ -94,8 +97,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 3.1 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 3.1", media);
-        System.out.println("algoritmo 3.1 média de " + EXECUTIONS + " execução: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 3.1 média de " + EXECUTIONS + " execução: " + media + " segundos");
         return matrix;
     }
 
@@ -129,8 +133,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 4 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 4", media);
-        System.out.println("algoritmo 4 média de " + EXECUTIONS + " execução: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 4 média de " + EXECUTIONS + " execução: " + media + " segundos");
         return matrix;
     }
 
@@ -146,8 +151,9 @@ public class ExecuteMatrix {
             media = media + (stopTime - startTime)/1000;
             System.out.println("Tempo de execução algoritmo 4.1 - " + i + ": " + (stopTime - startTime)/1000);
         }
+        media = media/EXECUTIONS;
         averageTimeExecution.put("Algoritmo 4.1", media);
-        System.out.println("algoritmo 4.1 média de " + EXECUTIONS + " execução: " + media/EXECUTIONS + " segundos");
+        System.out.println("algoritmo 4.1 média de " + EXECUTIONS + " execução: " + media + " segundos");
         return matrix;
     }
 
