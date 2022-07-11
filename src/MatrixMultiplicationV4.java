@@ -1,61 +1,48 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class MatrixMultiplicationV4 {
 
-    public int[][] calculate(int[][] matriz1, int[][] matriz2, int matrixSize) {
+    private ExecutorService pool;
+
+    int partitionDivider = 8;
+
+    public int[][] calculate(int[][] matrix1, int[][] matrix2, int matrixSize) {
         final int[][] matrix = new int[matrixSize][matrixSize];
 
-        int partitionSize = matrixSize / 16;
-        List<Thread> threadsIh = new ArrayList<>();
-        for (int ih = 0; ih < matrixSize; ih+= partitionSize) {
+        int partitionSize = matrixSize / partitionDivider;
+        pool = Executors.newCachedThreadPool();
+        Collection<Future<?>> tasks = new LinkedList<>();
+        for (int ih = 0; ih < matrixSize; ih += partitionSize) {
             final int newIh = ih;
-            Thread threadIh = new Thread(() -> {
-                List<Thread> threadsJh = new ArrayList<>();
-
-                for (int jh = 0; jh < matrixSize; jh+= partitionSize) {
-                    final int newJh = jh;
-                    Thread threadJh = new Thread(() -> {
-
-                        for(int kh = 0; kh < matrixSize; kh+= partitionSize){
-                            
-                            for(int il = 0; il < partitionSize; il++){
-                                
-                                for(int kl = 0; kl < partitionSize; kl++){
-                                    
-                                    for(int jl = 0; jl < partitionSize; jl++){
-                                        matrix[newIh+il][newJh+jl] = matrix[newIh+il][newJh+jl] + matriz1[newIh+il][kh+kl] * matriz2[kh+kl][newJh+jl];
-                                    }
-                                }
-                            }
-                        }
-
-                    });
-                    threadJh.start();
-                    threadsJh.add(threadJh);
-                    if (threadsJh.size() % 16 == 0) {
-                        waitForThreads(threadsJh);
-                    }
+            Future<?> future = pool.submit(() -> {
+                Collection<Future<?>> tasks2 = new LinkedList<>();
+                for (int jh = 0; jh < matrixSize; jh += partitionSize) {
+                    Future<?> future2 = pool.submit(new ThreadRunnableV4(matrix1, matrix2, matrix, matrixSize, newIh, jh, partitionSize));
+                    tasks2.add(future2);
                 }
+                waitThreads(tasks2);
             });
-            threadIh.start();
-            threadsIh.add(threadIh);
-            if (threadsIh.size() % 16 == 0) {
-                waitForThreads(threadsIh);
-            }
+            tasks.add(future);
+            waitThreads(tasks);
+
         }
+        pool.shutdown();
         return matrix;
     }
 
-    private void waitForThreads(List<Thread> threads) {
-        for (Thread thread : threads) {
+    private void waitThreads(Collection<Future<?>> tasks2) {
+        for (Future<?> currTask : tasks2) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                currTask.get();
+            } catch (Throwable thrown) {
+                pool.shutdown();
+                throw new RuntimeException();
             }
         }
-        threads.clear();
     }
 
 }
